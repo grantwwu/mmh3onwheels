@@ -8,12 +8,12 @@ blocks:
   - name: "Build"
     task:
       jobs:
-      - name: Docker build
+      - name: Python build
         commands:
+          - sem-version python 3.4
+          - python --version
           - checkout
-          - ls -1
-          - python setup.py bdist_wheel
-          - echo "Docker build..."
+          - python3 setup.py bdist_wheel
           - echo "done"
   - name: "Smoke tests"
     task:
