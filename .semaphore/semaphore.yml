@@ -7,25 +7,16 @@ agent:
 blocks:
   - name: "Build"
     task:
+      agent:
+        machine:
+          type: e1-standard-2
+          os_image: ubuntu1804
+        containers:
+          - name: main
+            image: python:3.5
       jobs:
       - name: Python build
         commands:
-          - sem-version python 3.4
           - python --version
           - checkout
           - python3 setup.py bdist_wheel
-          - echo "done"
-  - name: "Smoke tests"
-    task:
-      jobs:
-      - name: Smoke
-        commands:
-          - checkout
-          - echo "make smoke"
-  - name: "Unit tests"
-    task:
-      jobs:
-      - name: Lint code
-        commands:
-          - checkout
-          - echo "make lint"
